@@ -1,0 +1,10 @@
+node_modules
+dist
+apps/api/src/generated
+pnpm-lock.yaml
+.local
+.env
+.env.*
+coverage
+test-results
+playwright-report

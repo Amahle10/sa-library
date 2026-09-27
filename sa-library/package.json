@@ -1,0 +1,29 @@
+{
+  "name": "sa-library",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @sa-library/shared build && pnpm --parallel --filter @sa-library/web --filter @sa-library/api --filter @sa-library/shared dev",
+    "dev:web": "pnpm --filter @sa-library/shared build && pnpm --filter @sa-library/web dev",
+    "dev:api": "pnpm --filter @sa-library/shared build && pnpm --filter @sa-library/api dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm --filter @sa-library/shared build && pnpm -r typecheck",
+    "test": "pnpm --filter @sa-library/shared build && pnpm -r test",
+    "test:e2e": "pnpm --filter @sa-library/shared build && pnpm --filter @sa-library/api test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:local": "bash scripts/local-postgres.sh",
+    "db:local:stop": "bash scripts/local-postgres.sh stop",
+    "db:generate": "pnpm --filter @sa-library/api db:generate",
+    "db:migrate": "pnpm --filter @sa-library/api db:deploy",
+    "db:seed": "pnpm --filter @sa-library/api db:seed"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.9",
+    "@playwright/test": "^1.63.0"
+  }
+}

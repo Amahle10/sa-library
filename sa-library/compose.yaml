@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: sa_library
+      POSTGRES_PASSWORD: local-library-only
+      POSTGRES_DB: sa_library
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - library-postgres:/var/lib/postgresql
+      - ./scripts/init-test-db.sql:/docker-entrypoint-initdb.d/test-db.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U sa_library -d sa_library']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  library-postgres:
